@@ -19,6 +19,11 @@ class ActualiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Actualite::class);
     }
 
+    public function findAll()
+    {
+        return $this->findBy([], ['createdAt' => 'DESC']);
+    }
+
     /**
     * @return Actualite[] Returns an array of Actualite objects
     */

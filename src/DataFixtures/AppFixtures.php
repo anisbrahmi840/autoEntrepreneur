@@ -29,7 +29,7 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create();
+        $faker = \Faker\Factory::create();
         // $product = new Product();
         // $manager->persist($product);
 
@@ -54,22 +54,27 @@ class AppFixtures extends Fixture
         $activite1
             ->setNom("Secteur de l'industrie")
             ->setTaux(0.7)
+            ->setRef(uniqid('Activite-'))
             ;
         $activite2
             ->setNom("Secteur de l'agriculture")
             ->setTaux(10)
+            ->setRef(uniqid('Activite-'))
             ;
         $activite3
             ->setNom("Secteur du commerce")
             ->setTaux(20)
+            ->setRef(uniqid('Activite-'))
             ;
         $activite4
             ->setNom("Secteur des services")
             ->setTaux(15)
+            ->setRef(uniqid('Activite-'))
             ;
         $activite5
             ->setNom("Secteur de l’artisanat ou des métiers")
             ->setTaux(12)
+            ->setRef(uniqid('Activite-'))
             ;
             $manager->persist($activite1);
             $manager->persist($activite2);
@@ -84,7 +89,8 @@ class AppFixtures extends Fixture
                 ->setPrenom($faker->lastName)
                 ->setCin($faker->biasedNumberBetween($min = 10000000, $max = 99999999))
                 ->setEmail($faker->email)
-                ->setPassword($this->encoder->encodePassword($agent, 'agent'))
+                ->setEtat(true)
+                ->setPassword($this->encoder->encodePassword($agent, 'agent123'))
                 ;
             $manager->persist($agent);
         }
@@ -232,7 +238,7 @@ class AppFixtures extends Fixture
             $temoignage
                 ->setTitle($faker->sentence($nbWords = 6, $variableNbWords = true))
                 ->setEntrepreneur($entrepreneur)
-                ->setUrl($faker->randomElement(["https://www.youtube.com/embed/yvShowpI-2I", 'https://www.youtube.com/embed/1NE6k54523s', 'https://www.youtube.com/embed/jaS6o5jQLVw', 'https://www.youtube.com/embed/F0KZvMoOCwY']))
+                ->setUrl($faker->randomElement(['<iframe width="600" height="400" src="https://www.youtube.com/embed/VIQHxeCtCZs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>', '<iframe width="853" height="480" src="https://www.youtube.com/embed/jaS6o5jQLVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>', '<iframe width="853" height="480" src="https://www.youtube.com/embed/utQLvM6Y2Ts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>', '<iframe width="853" height="480" src="https://www.youtube.com/embed/8MJNuEPciJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>']))
                 ->setRef(uniqid('Tem-'))
                 ;
             $manager->persist($temoignage);

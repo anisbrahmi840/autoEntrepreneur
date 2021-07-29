@@ -15,9 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @Route("/entrepreneur")
- */
+
 class EntrepreneurController extends AbstractController
 {
     /**
@@ -25,7 +23,7 @@ class EntrepreneurController extends AbstractController
      *
      * @param Entrepreneur $entrepreneur
      * @return void
-     * @Route("/dashboard/", name="entrepreneur_dashboard")
+     * @Route("/entrepreneur/dashboard/", name="entrepreneur_dashboard")
      */
     public function dashboard(){
         if (!$this->getUser()->getCategorie()){
@@ -61,7 +59,7 @@ class EntrepreneurController extends AbstractController
     }
 
     /**
-     * @Route("/carte/{slug}", name="entrepreneur_carte", methods={"GET"})
+     * @Route("/entrepreneur/carte/{slug}", name="entrepreneur_carte", methods={"GET"})
      */
     public function carte(EntrepreneurRepository $entrepreneurRepository, string $slug): Response
     {
@@ -71,7 +69,7 @@ class EntrepreneurController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="entrepreneur_show", methods={"GET"})
+     * @Route("/entrepreneur/{slug}", name="entrepreneur_show", methods={"GET"})
      */
     public function show(EntrepreneurRepository $entrepreneurRepository, Entrepreneur $entrepreneur): Response
     {
@@ -83,7 +81,7 @@ class EntrepreneurController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/voir", name="entrepreneur_show_info", methods={"GET"})
+     * @Route("/entrepreneur/{slug}/voir", name="entrepreneur_show_info", methods={"GET"})
      */
     public function showInfo(EntrepreneurRepository $entrepreneurRepository, string $slug): Response
     {
@@ -93,7 +91,7 @@ class EntrepreneurController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}/voiractivite", name="entrepreneur_show_info_activite", methods={"GET"})
+     * @Route("/entrepreneur/{slug}/voiractivite", name="entrepreneur_show_info_activite", methods={"GET"})
      */
     public function showInfoActivite(EntrepreneurRepository $entrepreneurRepository, string $slug): Response
     {
@@ -104,7 +102,7 @@ class EntrepreneurController extends AbstractController
 
 
     /**
-     * @Route("/{slug}/edit", name="entrepreneur_edit", methods={"GET","POST"})
+     * @Route("/entrepreneur/{slug}/edit", name="entrepreneur_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Entrepreneur $entrepreneur): Response
     {
@@ -124,7 +122,7 @@ class EntrepreneurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/editpassword", name="entrepreneur_editpassword", methods={"GET","POST"})
+     * @Route("/entrepreneur/{id}/editpassword", name="entrepreneur_editpassword", methods={"GET","POST"})
      */
     public function editPassword(Request $request, Entrepreneur $entrepreneur, UserPasswordEncoderInterface $encoder): Response
     {
@@ -151,7 +149,7 @@ class EntrepreneurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="entrepreneur_delete", methods={"DELETE"})
+     * @Route("/entrepreneur/{id}", name="entrepreneur_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Entrepreneur $entrepreneur): Response
     {

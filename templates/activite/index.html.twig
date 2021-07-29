@@ -37,8 +37,8 @@
             <td>{{ activite.nom }}</td>
             <td>{{ activite.taux }}%</td>
             <td class="text-center">
-                <a href="{{ path('activite_show', {'id': activite.id}) }}"><i class="fa fa-eye text-success"></i></a>
-                <a href="{{ path('activite_edit', {'id': activite.id}) }}"><i class="fa fa-edit text-info"></i></a>
+                <a href="{{ path('activite_show', {'ref': activite.ref}) }}"><i class="fa fa-eye text-success"></i></a>
+                <a href="{{ path('activite_edit', {'ref': activite.ref}) }}"><i class="fa fa-edit text-info"></i></a>
             </td>
         </tr>
         {% else %}

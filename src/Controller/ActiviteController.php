@@ -11,9 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/admin/activite")
+ * @IsGranted("ROLE_ADMIN")
  */
 class ActiviteController extends AbstractController
 {
@@ -49,6 +51,7 @@ class ActiviteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $activite->setRef(uniqid('Activite-'));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($activite);
             $entityManager->flush();
@@ -63,7 +66,7 @@ class ActiviteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="activite_show", methods={"GET"})
+     * @Route("/{ref}", name="activite_show", methods={"GET"})
      */
     public function show(Activite $activite): Response
     {
@@ -73,7 +76,7 @@ class ActiviteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="activite_edit", methods={"GET","POST"})
+     * @Route("/{ref}/edit", name="activite_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Activite $activite): Response
     {
@@ -90,19 +93,5 @@ class ActiviteController extends AbstractController
             'activite' => $activite,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="activite_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Activite $activite): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$activite->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($activite);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('activite_index');
     }
 }

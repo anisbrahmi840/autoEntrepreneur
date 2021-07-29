@@ -19,6 +19,12 @@ class TemoignageRepository extends ServiceEntityRepository
         parent::__construct($registry, Temoignage::class);
     }
 
+    public function findAll()
+    {
+        return $this->findBy([], ['createdAt' => 'DESC']);
+    }
+
+
     // /**
     //  * @return Temoignage[] Returns an array of Temoignage objects
     //  */

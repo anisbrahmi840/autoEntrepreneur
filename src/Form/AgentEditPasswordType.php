@@ -42,8 +42,6 @@ class AgentEditPasswordType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Agent::class,
-        ]);
+        $resolver->setDefaults([]);
     }
 }

@@ -99,7 +99,7 @@ class TemoignageController extends AbstractController
 
 
     /**
-     * @Route("/{id}/delete", name="temoignage_delete")
+     * @Route("/{ref}/delete", name="temoignage_delete")
      */
     public function delete(Request $request, Temoignage $temoignage): Response
     {

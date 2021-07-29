@@ -11,9 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/admin/actualite")
+ * @IsGranted("ROLE_ADMIN")
  */
 class ActualiteController extends AbstractController
 {
@@ -75,7 +77,7 @@ class ActualiteController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="actualite_delete")
+     * @Route("/{ref}/delete", name="actualite_delete")
      */
     public function delete(Request $request, Actualite $actualite): Response
     {

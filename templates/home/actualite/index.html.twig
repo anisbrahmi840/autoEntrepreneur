@@ -3,7 +3,7 @@
 {% block title %}Actualite{% endblock %}
 
 {% block body %}
-<section id="blog-main" class="blog-main archive grid section">
+<section id="blog-main" class="blog-main grid section">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
@@ -29,9 +29,12 @@
 										</div>
 									</div>
 									<div class="blog-info">
-										<h2><a href="{{path('actualite_show_entrepreneur', {ref: actualite.ref})}}">{{actualite.title}}</a></h2>
+										<h2><a
+												href="{{path('actualite_show_entrepreneur', {ref: actualite.ref})}}">{{actualite.title}}</a>
+										</h2>
 										<div class="meta">
-											<span><i class="fa fa-calendar-o"></i>{{actualite.createdAt | date('d-m-Y')}}</span>
+											<span><i
+													class="fa fa-calendar-o"></i>{{actualite.createdAt | date('d-m-Y')}}</span>
 										</div>
 										<p>{{ actualite.description|u.truncate(100, '...') }}</p>
 										<div class="text-center">
@@ -50,5 +53,9 @@
 			</div>
 		</div>
 	</div>
+	<div class="navigation d-flex justify-content-center mt-4">
+		{{ knp_pagination_render(actualites) }}
+	</div>
 </section>
+
 {% endblock %}

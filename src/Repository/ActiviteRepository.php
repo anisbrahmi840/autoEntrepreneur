@@ -50,7 +50,7 @@ class ActiviteRepository extends ServiceEntityRepository
     public function search($text)
     {
         $dd = $this->createQueryBuilder('a')
-        ->andWhere('a.nom like :text OR a.taux like :text')
+        ->andWhere('a.nom like :text OR a.taux like :text OR a.ref like :text')
         ->setParameter('text', "%$text%")
         ;
         return $dd

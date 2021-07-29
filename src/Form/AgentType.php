@@ -52,8 +52,7 @@ class AgentType extends AbstractType
                 'required' => false,
                 'first_options'  => ['label' => 'Nouveau mot de passe',
                                     'constraints' => [
-                                        new NotNull(['message' => 'Saisir votre mot de passe']),
-                                        new NotBlank(['message' => 'Saisir votre nom']),
+                                        new NotBlank(['message' => 'Saisir votre mot de passe']),
                                         new Length(['min' => 6, 'minMessage' => "mot de passe minimum 6 caractères"]),
                                     ]],
                 'second_options' => ['label' => 'Confirmer  mot de passe'],

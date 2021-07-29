@@ -66,4 +66,16 @@ class DeclarationRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+       public function regulariser($value, $date)   {
+       return $this->createQueryBuilder('d')
+            ->andWhere('d.entrepreneur = :val')
+            ->andWhere(":date > d.date_ex")
+            ->andWhere("d.etat = false")           
+            ->setParameter('val', $value)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

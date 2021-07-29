@@ -305,7 +305,7 @@ class AdminController extends AbstractController
 
 
 
-// -----------------------------Controle Agnet --------------------------------------------------------------
+// -----------------------------Controle Agent --------------------------------------------------------------
 
     /**
      * @Route("/agents/liste", name="agent_index_admin", methods={"GET", "POST"})

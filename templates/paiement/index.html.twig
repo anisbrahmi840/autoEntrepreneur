@@ -13,6 +13,7 @@
                 </div>
             </div>
         </div>
+        {% if not declarations is  empty %}
         <table class="table table-striped table-bordered">
             <thead class="text-center">
                 <tr>
@@ -23,7 +24,7 @@
                     <th>actions</th>
                 </tr>
             </thead>
-            <tbody class="text-center">            
+            <tbody class="text-center">
                 {% set nb = false %}
                 {% for declaration in declarations %}
                 {% if declaration.paiement %}
@@ -53,9 +54,14 @@
                     <td colspan="9">Pas de versement</td>
                 </tr>
                 {% endif %}
-                
+
             </tbody>
         </table>
+        {% else %}
+        <tr>
+            <td colspan="8">Aucun enregistrement trouvé</td>
+        </tr>
+        {% endif %}
         <div class="navigation d-flex justify-content-center">
             {{ knp_pagination_render(declarations) }}
         </div>

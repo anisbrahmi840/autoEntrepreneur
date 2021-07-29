@@ -17,42 +17,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AgentController extends AbstractController
 {
     /**
-     * @Route("/agent/{id}", name="agent_show", methods={"GET"})
-     */
-    public function show(Agent $agent): Response
-    {
-        return $this->render('agent/show.html.twig', [
-            'agent' => $agent,
-        ]);
-    }
-
-    /**
-     * @Route("/agent/{id}/edit", name="agent_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Agent $agent): Response
-    {
-        $form = $this->createForm(AgentType::class, $agent);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('agent_index');
-        }
-
-        return $this->render('agent/edit.html.twig', [
-            'agent' => $agent,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/agent/{slug}/editpassword", name="agent_editpassword", methods={"GET","POST"})
      */
     public function editPassword(Request $request, Agent $agent, UserPasswordEncoderInterface $encoder): Response
     {
         $oldPasswordBd = $agent->getPassword();
-        $form = $this->createForm(AgentEditPasswordType::class, $agent);
+        $form = $this->createForm(AgentEditPasswordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {  
             $oldPassword = $request->request->get('agent_edit_password')['oldPassword'];
@@ -60,7 +30,7 @@ class AgentController extends AbstractController
             if(!password_verify($oldPassword, $oldPasswordBd)){
                 $form->get('oldPassword')->addError(new FormError('Mot de passe incorrect!'));
             }else{
-                $agent->setPassword($encoder->encodePassword($agent, $agent->getPassword()) );
+                $agent->setPassword($encoder->encodePassword($agent, $form->getData()['password']) );
                 
                 $this->getDoctrine()->getManager()->flush();
                 return $this->redirectToRoute('admin_index');
@@ -71,19 +41,5 @@ class AgentController extends AbstractController
             'agent' => $agent,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/agent/{id}", name="agent_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Agent $agent): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$agent->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($agent);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('agent_index_admin');
     }
 }
